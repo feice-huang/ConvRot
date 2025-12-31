@@ -36,7 +36,8 @@ Building on ConvRot, we further design **ConvLinear4bit**, a unified module that
 into a single layer, enabling efficient W4A4 inference for Diffusion Transformers.
 
 ---
-This codebase is built on top of [QuaRot](https://github.com/spcl/QuaRot).
+This codebase is built on top of [QuaRot](https://github.com/spcl/QuaRot).  
+ConvRot-related code is located in `QuaRot/convrot` and `QuaRot/e2e` (coming soon).
 
 ---
 
