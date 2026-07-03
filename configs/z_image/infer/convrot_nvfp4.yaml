@@ -1,0 +1,16 @@
+# Offline convrot config — points at the quantized transformer on disk
+# (produced by quantize.py from ../quantize/convrot_nvfp4.yaml). Used for inference/bench.
+model:
+  type: z_image
+  path: /path/to/Z-Image-Turbo
+  quantized_path: /path/to/quantized/Z-Image-Turbo-ConvRot-nvfp4
+inputs:
+  prompt: 'A compact green circuit board featuring a Raspberry Pi logo, labeled "Raspberry Pi 4 Model B," with Ethernet, USB, and GPIO connectors, along with various electronic components.'
+  height: 1024
+  width: 1024
+  # Turbo distilled model: 9 steps → 8 DiT forwards, no CFG (guidance 0).
+  num_inference_steps: 9
+  guidance_scale: 0.0
+  max_sequence_length: 512
+weight:
+  dtype: convrot_nvfp4

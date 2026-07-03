@@ -1,0 +1,21 @@
+# ConvRot + NVFP4 dependencies.
+#
+# Requires an NVFP4-capable GPU (NVIDIA Blackwell, sm_120) and a CUDA toolchain
+# (nvcc) on PATH — the rotation kernel in convrot/csrc/ is JIT-compiled on first
+# use via torch.utils.cpp_extension.load.
+#
+# torch / torchao / triton below are pinned to the +cu129 builds this was
+# developed against. Install the CUDA build that matches your toolkit.
+
+torch>=2.11.0
+torchao>=0.17.0          # NVFP4 tensor formats + inference workflow
+triton>=3.6.0
+
+# Diffusers must be recent enough to ship ZImageTransformer2DModel / ZImagePipeline
+# (Z-Image-Turbo support). FLUX.1-dev and Qwen-Image work on older releases.
+diffusers>=0.39.0
+transformers>=4.44
+accelerate>=0.34
+safetensors>=0.4
+
+PyYAML>=6.0

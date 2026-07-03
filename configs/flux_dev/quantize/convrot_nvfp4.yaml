@@ -1,0 +1,21 @@
+model:
+  type: flux_dev
+  path: /path/to/FLUX.1-dev
+inputs:
+  prompt: A cinematic photograph of a yellow rubber duck standing on a marble kitchen counter, soft window light, shallow depth of field, hyper-detailed
+  height: 1024
+  width: 1024
+  num_inference_steps: 28
+  guidance_scale: 3.5
+  max_sequence_length: 512
+weight:
+  dtype: convrot_nvfp4
+  rot_size: 256
+activation:
+  per_tensor_scale: true
+  use_triton_kernel: true
+# x_embedder in_dim=64 cannot be Hadamard-rotated at rot_size=256.
+# time_text_embed is tiny (~50M params total) and near the input — kept bf16 for quality parity.
+skip_layers:
+  - x_embedder
+  - time_text_embed

@@ -1,0 +1,15 @@
+# Offline convrot config — points at the quantized transformer on disk
+# (produced by quantize.py from ../quantize/convrot_nvfp4.yaml). Used for inference/bench.
+model:
+  type: qwen_image
+  path: /path/to/Qwen-Image
+  quantized_path: /path/to/quantized/Qwen-Image-ConvRot-nvfp4
+inputs:
+  prompt: 'A compact green circuit board featuring a Raspberry Pi logo, labeled "Raspberry Pi 4 Model B," with Ethernet, USB, and GPIO connectors, along with various electronic components.'
+  height: 1024
+  width: 1024
+  num_inference_steps: 50
+  true_cfg_scale: 4.0
+  negative_prompt: ""
+weight:
+  dtype: convrot_nvfp4

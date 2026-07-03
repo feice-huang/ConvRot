@@ -1,0 +1,13 @@
+model:
+  type: flux_dev
+  path: /path/to/FLUX.1-dev
+  quantized_path: /path/to/quantized/flux_dev_convrot_nvfp4
+inputs:
+  prompt: A cinematic photograph of a yellow rubber duck standing on a marble kitchen counter, soft window light, shallow depth of field, hyper-detailed
+  height: 1024
+  width: 1024
+  num_inference_steps: 28
+  guidance_scale: 3.5
+  max_sequence_length: 512
+weight:
+  dtype: convrot_nvfp4
