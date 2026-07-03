@@ -1,0 +1,32 @@
+# Online convrot config for Z-Image-Turbo (ZImageTransformer2DModel).
+# skip_layers (substring match on module FQN) — everything outside the DiT
+# blocks, all norm/AdaLN modulation, and the tiny near-input/output projections
+# stay bf16; the 30 main layers.N + 4 refiner blocks (attention + FFN) quantize:
+#   x_embedder        — all_x_embedder.2-1, in_dim 64 not divisible by rot 256, must skip
+#   final_layer       — all_final_layer.2-1.{linear (out=64), adaLN_modulation}: output-sensitive
+#   adaLN_modulation  — per-block AdaLN scale/shift Linear (layers/refiners), norm-adjacent,
+#                       error propagates over the whole block → keep bf16
+#   t_embedder        — timestep embedding MLP (256↔1024), tiny near-input
+#   cap_embedder      — caption (text) input projection (2560->3840), input-sensitive
+model:
+  type: z_image
+  path: /path/to/Z-Image-Turbo
+inputs:
+  prompt: 'A compact green circuit board featuring a Raspberry Pi logo, labeled "Raspberry Pi 4 Model B," with Ethernet, USB, and GPIO connectors, along with various electronic components.'
+  height: 1024
+  width: 1024
+  num_inference_steps: 9
+  guidance_scale: 0.0
+  max_sequence_length: 512
+weight:
+  dtype: convrot_nvfp4
+  rot_size: 256
+activation:
+  per_tensor_scale: true
+  use_triton_kernel: true
+skip_layers:
+  - x_embedder
+  - final_layer
+  - adaLN_modulation
+  - t_embedder
+  - cap_embedder
